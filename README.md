@@ -7,11 +7,15 @@ screen = pygame.display.set_mode((800, 400))
 pygame.display.set_caption('Amogus Adventures')
 clock = pygame.time.Clock()
 
-test_font = pygame.font.Font('Graphics/Pixeltype.ttf', 50)
+
 StartButton = pygame.image.load('Graphics/STARTAS.png')
-GameStart = pygame.image.load('Graphics/gamestart.png')
-text_surface = test_font.render('Press enter to play!', True, 'Green')
+StartButton_rect = StartButton.get_rect()
 StartButton2 = pygame.image.load('Graphics/STARTAS2.png')
+StartButton2_rect = StartButton.get_rect()
+test_font = pygame.font.Font('Graphics/Pixeltype.ttf', 50)
+GameStart = pygame.image.load('Graphics/gamestart.png')
+text_surface = test_font.render('Click start to play!', True, 'Green')
+
 
 class Game:
     def __init__(self):
@@ -36,19 +40,19 @@ class Game:
             left_button,_,_ = pygame.mouse.get_pressed()
             if self.rect.collidepoint(mouse_position) and left_button:
                 # Clicked, do your code, start your game
-                print('clicked')
-                
-                pygame.draw.rect(self.screen, pygame.Color("green"), self.rect)
+                clicked = print('clicked')
+                if clicked == True :
+                    screen.blit(StartButton2,(0,0))
+                    
             else:
                 # Not clicked, do normal stuff
-                pygame.draw.rect(self.screen, pygame.Color("red"), self.rect)
+                screen.blit(GameStart,(0,0))
+                screen.blit(StartButton,(0,0))
+                screen.blit(text_surface,(115,25))
  
             clock.tick(FPS)
             pygame.display.update()
 
-            screen.blit(GameStart,(0,0))
-            screen.blit(StartButton,(0,0))
-            screen.blit(text_surface,(115,25))
             
 if __name__ == '__main__':
     pygame.init()
