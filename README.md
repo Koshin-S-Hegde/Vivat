@@ -1,6 +1,6 @@
 import sys
 import pygame
-
+import time
 
 pygame.init()
     
@@ -35,7 +35,8 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
- 
+            if mouse_position(self.rect):
+                screen.blit(StartButton2,(0,0))
             mouse_position = pygame.mouse.get_pos()
             left_button,_,_ = pygame.mouse.get_pressed()
             if not (self.rect.collidepoint(mouse_position) and left_button):
@@ -45,6 +46,7 @@ class Game:
             else:
                 # Clicked, do your code, start your game
                 clicked = print('clicked')
+                
                 screen.blit(StartButton2,(0,0))
 
             clock.tick(FPS)
