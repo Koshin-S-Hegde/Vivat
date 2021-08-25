@@ -1,6 +1,7 @@
 import sys
 import pygame
 
+
 pygame.init()
     
 screen = pygame.display.set_mode((800, 400))
@@ -13,8 +14,8 @@ StartButton_rect = StartButton.get_rect()
 StartButton2 = pygame.image.load('Graphics/STARTAS2.png')
 StartButton2_rect = StartButton.get_rect()
 test_font = pygame.font.Font('Graphics/Pixeltype.ttf', 50)
-GameStart = pygame.image.load('Graphics/gamestart.png')
-text_surface = test_font.render('Click start to play!', True, 'Green')
+GameStart = pygame.image.load('Graphics/gamestart.png').convert()
+text_surface = test_font.render('', True, 'Green')
 
 
 class Game:
@@ -23,7 +24,6 @@ class Game:
         self.position = (100, 70)
         self.size = (325,125)
         self.rect = pygame.Rect(self.position, self.size)
-        self.color = pygame.Color("red")
         pygame.display.set_caption('Amogus Adventures')
 
     def run(self):
@@ -38,20 +38,21 @@ class Game:
  
             mouse_position = pygame.mouse.get_pos()
             left_button,_,_ = pygame.mouse.get_pressed()
-            if self.rect.collidepoint(mouse_position) and left_button:
-                # Clicked, do your code, start your game
-                clicked = print('clicked')
-                if clicked == True :
-                    screen.blit(StartButton2,(0,0))
+            if not (self.rect.collidepoint(mouse_position) and left_button):
+                # Not clicked, do normal stuff
+                screen.blit(StartButton,(0,0))
                     
             else:
-                # Not clicked, do normal stuff
-                screen.blit(GameStart,(0,0))
-                screen.blit(StartButton,(0,0))
-                screen.blit(text_surface,(115,25))
- 
+                # Clicked, do your code, start your game
+                clicked = print('clicked')
+                screen.blit(StartButton2,(0,0))
+
             clock.tick(FPS)
             pygame.display.update()
+
+            screen.blit(GameStart,(0,0))
+            screen.blit(text_surface,(115,25))
+
 
             
 if __name__ == '__main__':
