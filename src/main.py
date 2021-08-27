@@ -32,6 +32,8 @@ class Main:
 
     def __render(self):
         self.__app.render()
+        self.__pygame_window.fill((0, 0, 0))  # Background color
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
